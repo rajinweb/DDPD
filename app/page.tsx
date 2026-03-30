@@ -1,11 +1,17 @@
+import PortfolioDashboard from "@/components/PortfolioDashboard";
+import { getPortfolioSnapshot, parsePortfolioFilters } from "@/lib/programs";
 
+type HomeProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
 
-export default function Home() {
+export default async function Home({ searchParams }: HomeProps) {
+  const filters = parsePortfolioFilters(await searchParams);
+  const snapshot = await getPortfolioSnapshot(filters);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        adsf
-      </main>
-    </div>
+    <main className="mx-auto max-w-screen-2xl px-4 pb-12 pt-6 sm:px-6 lg:px-8">
+      <PortfolioDashboard snapshot={snapshot} />
+    </main>
   );
 }
