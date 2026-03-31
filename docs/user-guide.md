@@ -15,7 +15,6 @@ This application simulates the front end of a real portfolio system. It behaves 
 
 - Clinical reviewers who need read-only oversight of the portfolio
 - Portfolio managers who need the same visibility plus limited metadata editing
-- Product, engineering, or design reviewers evaluating the front-end architecture
 
 ## Getting Around
 
@@ -37,7 +36,7 @@ Each row in the table represents a single program. Users can:
 
 - scan high-level program attributes
 - compare phase, therapeutic area, progress, enrollment, and risk
-- click anywhere on a row to open that program’s detail page
+- click on a row to open that program’s detail page
 
 ### Program Detail Page
 
@@ -91,7 +90,7 @@ Use the footer controls to:
 
 From the main table:
 
-- click anywhere on a row
+- click on a row
 - review the detail page for that specific program
 
 The detail page shows:
