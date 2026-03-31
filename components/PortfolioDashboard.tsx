@@ -87,6 +87,25 @@ export default function PortfolioDashboard({ snapshot }: PortfolioDashboardProps
         </div>
       </section>
 
+      <section className={cn(SURFACE_CARD, "rounded-md p-5 sm:p-6")}>
+        <div className="flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className={EYEBROW_TEXT}>Portfolio Controls</p>
+            <h2 className="text-xl font-semibold text-ink">Filter, search, and rank the pipeline</h2>
+          </div>
+          <p className="text-sm text-copy">
+            Filters sync to the URL so the entire view stays reproducible and shareable. React Query caches the
+            result sets and keeps previous pages warm while the mock API responds in the background.
+          </p>
+        </div>
+
+  
+          <PortfolioFilters
+            key={`${filters.q}:${filters.phase}:${filters.therapeuticArea}:${filters.riskLevel}:${filters.sortBy}:${filters.page}:${filters.limit}`}
+            filters={filters}
+          />
+      
+      </section>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-6">
         <StatCard
           label="Total Programs"
@@ -134,25 +153,6 @@ export default function PortfolioDashboard({ snapshot }: PortfolioDashboardProps
 
       <PortfolioInsights insights={insights} />
 
-      <section className={cn(SURFACE_CARD, "rounded-md p-5 sm:p-6")}>
-        <div className="flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className={EYEBROW_TEXT}>Portfolio Controls</p>
-            <h2 className="text-xl font-semibold text-ink">Filter, search, and rank the pipeline</h2>
-          </div>
-          <p className="text-sm text-copy">
-            Filters sync to the URL so the entire view stays reproducible and shareable. React Query caches the
-            result sets and keeps previous pages warm while the mock API responds in the background.
-          </p>
-        </div>
-
-  
-          <PortfolioFilters
-            key={`${filters.q}:${filters.phase}:${filters.therapeuticArea}:${filters.riskLevel}:${filters.sortBy}:${filters.page}:${filters.limit}`}
-            filters={filters}
-          />
-      
-      </section>
 
       <section className={cn(SURFACE_PANEL, "rounded-md p-5 sm:p-6")}>
         <div className="flex flex-wrap items-end justify-between gap-4">

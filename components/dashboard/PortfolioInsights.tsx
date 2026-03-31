@@ -23,7 +23,7 @@ function InsightCard({ eyebrow, title, description, children }: InsightCardProps
       <p className={EYEBROW_TEXT}>{eyebrow}</p>
       <h3 className="mt-2 text-xl font-semibold tracking-tight text-ink">{title}</h3>
       <p className="mt-2 text-sm leading-6 text-copy">{description}</p>
-      <div className="mt-6">{children}</div>
+      {children}
     </article>
   );
 }
@@ -152,10 +152,10 @@ function RiskDistribution({
   const highRiskCount = items.find((item) => item.label === "High")?.value ?? 0;
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[150px_minmax(0,1fr)] lg:items-center">
-      <div className="mx-auto flex h-[150px] w-[150px] items-center justify-center">
+    <div className="grid gap-6 lg:grid-cols-[200px_minmax(0,1fr)] lg:items-center">
+      <div className="mx-auto flex h-50 w-50 items-center justify-center">
         <svg viewBox="0 0 120 120" className="h-full w-full" role="img" aria-label="Risk distribution donut chart">
-          <circle cx="60" cy="60" r={radius} fill="none" stroke="rgba(148, 163, 184, 0.18)" strokeWidth="16" />
+          <circle cx="60" cy="60" r={radius} fill="none" stroke="rgba(148, 163, 184, 0.18)" strokeWidth="15" />
           {segments.map((segment) => (
             <circle
               key={segment.label}
@@ -164,7 +164,7 @@ function RiskDistribution({
               r={radius}
               fill="none"
               stroke={segment.color}
-              strokeWidth="16"
+              strokeWidth="15"
               strokeLinecap="butt"
               strokeDasharray={segment.dashArray}
               strokeDashoffset={segment.dashOffset}
@@ -179,7 +179,7 @@ function RiskDistribution({
             y="72"
             textAnchor="middle"
             className="fill-muted-foreground"
-            style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase" }}
+            style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase" }}
           >
             High Risk
           </text>
@@ -203,14 +203,8 @@ function RiskDistribution({
 
 export default function PortfolioInsights({ insights }: PortfolioInsightsProps) {
   return (
-    <section className="grid gap-4 xl:grid-cols-[1.2fr_1fr_1fr]">
-      <InsightCard
-        eyebrow="Phase Mix"
-        title="Pipeline balance across the current portfolio lens"
-        description="This view shows where visible programs sit in the development lifecycle, helping managers spot stage concentration and downstream bottlenecks."
-      >
-        <PhaseDistribution items={insights.phaseDistribution} />
-      </InsightCard>
+    <section className="grid gap-4 grid-cols-2">
+    
 
       <InsightCard
         eyebrow="Therapeutic Areas"
@@ -219,18 +213,26 @@ export default function PortfolioInsights({ insights }: PortfolioInsightsProps) 
       >
         <TherapeuticAreaDistribution items={insights.therapeuticAreaDistribution} />
       </InsightCard>
-
-      <InsightCard
-        eyebrow="Risk Posture"
-        title="Risk composition and execution load"
-        description="A compact view of portfolio risk, paired with enrollment completion and study density, to surface whether operational complexity is rising with the current slice."
-      >
-        <RiskDistribution
-          items={insights.riskDistribution}
-          enrollmentCompletionRate={insights.enrollmentCompletionRate}
-          averageStudiesPerProgram={insights.averageStudiesPerProgram}
-        />
-      </InsightCard>
+      <div className="space-y-4">
+          <InsightCard
+            eyebrow="Risk Posture"
+            title="Risk composition and execution load"
+            description="A compact view of portfolio risk, paired with enrollment completion and study density, to surface whether operational complexity is rising with the current slice."
+          >
+            <RiskDistribution
+              items={insights.riskDistribution}
+              enrollmentCompletionRate={insights.enrollmentCompletionRate}
+              averageStudiesPerProgram={insights.averageStudiesPerProgram}
+            />
+          </InsightCard>
+          <InsightCard
+          eyebrow="Phase Mix"
+          title="Pipeline balance across the current portfolio lens"
+          description="This view shows where visible programs sit in the development lifecycle, helping managers spot stage concentration and downstream bottlenecks."
+        >
+          <PhaseDistribution items={insights.phaseDistribution} />
+        </InsightCard>
+      </div>
     </section>
   );
 }
